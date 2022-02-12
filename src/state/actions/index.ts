@@ -1,38 +1,39 @@
-import { ActionType } from "../action-types";
-import { CellTypes } from "../cell";
+import { ActionType } from '../action-types';
+import { CellTypes } from '../cell';
 
-interface MoveCellAction {
+export type Direction = 'up' | 'down';
+
+export interface MoveCellAction {
     type: ActionType.MOVE_CELL;
     payload: {
         id: string;
-        direction: 'up' | 'down';
-    }
+        direction: Direction;
+    };
 }
 
-interface DeleteCellAction {
+export interface DeleteCellAction {
     type: ActionType.DELETE_CELL;
     payload: string;
 }
 
-interface InsertCellBeforeAction {
-    type: ActionType.INSERT_CELL_BEFORE;
+export interface InsertCellAfterAction {
+    type: ActionType.INSERT_CELL_AFTER;
     payload: {
-        id: string;
+        id: string | null;
         type: CellTypes;
-    }
+    };
 }
 
-interface UpdateCellAction {
+export interface UpdateCellAction {
     type: ActionType.UPDATE_CELL;
     payload: {
         id: string;
         content: string;
-    }
+    };
 }
 
-export type Action = 
-    MoveCellAction
+export type Action =
+    | MoveCellAction
     | DeleteCellAction
-    | InsertCellBeforeAction
-    | UpdateCellAction
-;
+    | InsertCellAfterAction
+    | UpdateCellAction;
